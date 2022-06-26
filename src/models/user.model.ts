@@ -1,7 +1,6 @@
 import Client from "../database";
 import { User, Create_User } from "../types/user.type";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 const salt: string = process.env.SALT_ROUNDS as string;
 const pepper: string = process.env.BCRYPT_PASSWORD as string;
