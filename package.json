@@ -1,14 +1,16 @@
 {
   "name": "storefront",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "udacity second project",
+  "main": "server.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon src/server.ts",
     "build": "npx tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "tsc && node dist/server.js",
+    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
+    "tsc": "npx tsc",
     "jasmine": "jasmine",
-    "test": "npm run build && npm run jasmine",
+    "test": "tsc && export ENV=test && db-migrate --env test up && jasmine-ts && db-migrate reset",
     "prettier": "prettier --write src/**/*.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"
@@ -17,8 +19,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/jasmine": "^4.0.3",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^18.0.0",
+    "@types/pg": "^8.6.5",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
@@ -27,13 +35,23 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jasmine": "^4.2.1",
     "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
     "nodemon": "^2.0.16",
     "prettier": "^2.7.1",
-    "supertest": "^6.2.3",
     "ts-node": "^10.8.1",
+    "tsc-watch": "^5.0.3",
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "express": "^4.18.1"
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "supertest": "^6.2.3"
   }
 }
