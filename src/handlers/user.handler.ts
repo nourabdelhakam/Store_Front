@@ -37,7 +37,7 @@ const create_user = async (req: Request, res: Response) => {
       password: req.body.password,
     };
     const new_user: User = await userHandler.create_user(user_obj);
-    let token: string = jwt.sign({ user_obj: new_user }, token_secret);
+    const token: string = jwt.sign({ user_obj: new_user }, token_secret);
     res.json(token);
   } catch (err) {
     res.status(400);

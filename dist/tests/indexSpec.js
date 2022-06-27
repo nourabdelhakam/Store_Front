@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
-const index_1 = __importDefault(require("../index"));
-const request = (0, supertest_1.default)(index_1.default);
+const server_1 = __importDefault(require("../server"));
+const request = (0, supertest_1.default)(server_1.default);
 describe("Test basic endpoint server", () => {
     it("Get the / endpoint", () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request.get("/");

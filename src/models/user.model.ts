@@ -35,14 +35,14 @@ export class UserModel {
       const connection = await Client.connect();
       const sql =
         "INSERT INTO users (first_name, last_name, password) VALUES($1, $2, $3, $4) RETURNING *";
-      const hashed_pass: string = bcrypt.hashSync(
+      const hashed_password: string = bcrypt.hashSync(
         user.password + pepper,
         parseInt(salt)
       );
       const result = await connection.query(sql, [
         user.first_name,
         user.last_name,
-        hashed_pass,
+        hashed_password,
       ]);
       connection.release();
       return result.rows[0];
