@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = require("../models/user.model");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const authorize_middlWare_1 = require("../middleWares/authorize.middlWare");
 const userHandler = new user_model_1.UserModel();
 const token_secret = process.env.TOKEN_SECRET;
 const indexAllUsers = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -64,9 +63,9 @@ const delete_user = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 const users_routes = (app) => {
-    app.get("/users", authorize_middlWare_1.authorize, indexAllUsers);
-    app.get("/users/:id", authorize_middlWare_1.authorize, show_user_by_id);
+    app.get("/users", indexAllUsers);
+    app.get("/users/:id", show_user_by_id);
     app.post("/users", create_user);
-    app.delete("/users/:id", authorize_middlWare_1.authorize, delete_user);
+    app.delete("/users/:id", delete_user);
 };
 exports.default = users_routes;

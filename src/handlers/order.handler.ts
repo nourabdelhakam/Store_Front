@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { OrderModel } from "../models/order.model";
 import { Order, Add_Product } from "../types/order.type";
-import { authorize } from "../middleWares/authorize.middlWare";
 
 const orderHandler = new OrderModel();
 
@@ -81,9 +80,9 @@ const add_product = async (req: Request, res: Response) => {
 };
 
 const orders_routes = (app: express.Application) => {
-  app.get("/orders", authorize, indexAllOrders);
-  app.get("/orders/latest/:user_id", authorize, show_order_by_user_id);
-  app.get("/orders/:status", authorize, show_order_by_status);
+  app.get("/orders", indexAllOrders);
+  app.get("/orders/latest/:user_id", show_order_by_user_id);
+  app.get("/orders/:status", show_order_by_status);
   app.post("/orders", create_order);
   app.delete("/orders/:id", delete_order);
 };

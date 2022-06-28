@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const order_model_1 = require("../models/order.model");
-const authorize_middlWare_1 = require("../middleWares/authorize.middlWare");
 const orderHandler = new order_model_1.OrderModel();
 const indexAllOrders = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -66,24 +65,25 @@ const delete_order = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.json(err);
     }
 });
-// const add_product = async (req: Request, res: Response) => {
-//   try {
-//     const prod_obj: Add_Product = {
-//       quantity: req.body.quantity,
-//       order_id: req.body.order_id,
-//       product_id: req.body.product_id,
-//     };
-//     const new_prod = await orderHandler.add_new_product(prod_obj);
-//     res.json(new_prod);
-//   } catch (err) {
-//     res.status(400);
-//     res.json(err);
-//   }
-// };
+const add_product = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const prod_obj = {
+            quantity: req.body.quantity,
+            order_id: req.body.order_id,
+            product_id: req.body.product_id,
+        };
+        const new_prod = yield orderHandler.add_new_product(prod_obj);
+        res.json(new_prod);
+    }
+    catch (err) {
+        res.status(400);
+        res.json(err);
+    }
+});
 const orders_routes = (app) => {
-    app.get("/orders", authorize_middlWare_1.authorize, indexAllOrders);
-    app.get("/orders/latest/:user_id", authorize_middlWare_1.authorize, show_order_by_user_id);
-    app.get("/orders/:status", authorize_middlWare_1.authorize, show_order_by_status);
+    app.get("/orders", indexAllOrders);
+    app.get("/orders/latest/:user_id", show_order_by_user_id);
+    app.get("/orders/:status", show_order_by_status);
     app.post("/orders", create_order);
     app.delete("/orders/:id", delete_order);
 };

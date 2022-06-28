@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import { UserModel } from "../models/user.model";
 import { User, Create_User } from "../types/user.type";
 import jwt from "jsonwebtoken";
-import { authorize } from "../middleWares/authorize.middlWare";
 
 const userHandler = new UserModel();
 const token_secret: string = process.env.TOKEN_SECRET as string;
@@ -58,10 +57,10 @@ const delete_user = async (req: Request, res: Response) => {
 };
 
 const users_routes = (app: express.Application) => {
-  app.get("/users", authorize, indexAllUsers);
-  app.get("/users/:id", authorize, show_user_by_id);
+  app.get("/users", indexAllUsers);
+  app.get("/users/:id", show_user_by_id);
   app.post("/users", create_user);
-  app.delete("/users/:id", authorize, delete_user);
+  app.delete("/users/:id", delete_user);
 };
 
 export default users_routes;

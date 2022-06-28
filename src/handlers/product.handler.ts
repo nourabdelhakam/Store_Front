@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { ProductModel } from "../models/product.model";
 import { Product, Create_Product } from "../types/product.type";
-import { authorize } from "../middleWares/authorize.middlWare";
 
 const productHandler = new ProductModel();
 
@@ -71,7 +70,7 @@ const products_routes = (app: express.Application) => {
   app.get("/products", indexAllProducts);
   app.get("/products/:id", show_product_by_id);
   app.get("/products/category/:category", show_product_by_cat);
-  app.post("/products", authorize, create_product);
+  app.post("/products", create_product);
   app.delete("/products/:id", delete_product);
 };
 

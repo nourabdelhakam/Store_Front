@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
-// import products_routes from './handlers/store';
-// import orders_routes from './handlers/orders';
-// import users_routes from './handlers/users';
+const user_handler_1 = __importDefault(require("./handlers/user.handler"));
+const product_handler_1 = __importDefault(require("./handlers/product.handler"));
+const order_handler_1 = __importDefault(require("./handlers/order.handler"));
 const app = (0, express_1.default)();
 const address = "0.0.0.0:3003";
 const corsConfig = {
@@ -16,9 +16,9 @@ const corsConfig = {
 };
 app.use((0, cors_1.default)(corsConfig));
 app.use(body_parser_1.default.json());
-// products_routes(app);
-// orders_routes(app);
-// users_routes(app);
+(0, user_handler_1.default)(app);
+(0, product_handler_1.default)(app);
+(0, order_handler_1.default)(app);
 app.get("/", function (req, res) {
     res.send("Hello World from port 3003");
 });

@@ -1,9 +1,10 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-// import products_routes from './handlers/store';
-// import orders_routes from './handlers/orders';
-// import users_routes from './handlers/users';
+
+import users_routes from "./handlers/user.handler";
+import products_routes from "./handlers/product.handler";
+import orders_routes from "./handlers/order.handler";
 
 const app: Application = express();
 const address = "0.0.0.0:3003";
@@ -12,9 +13,9 @@ const corsConfig = {
 };
 app.use(cors(corsConfig));
 app.use(bodyParser.json());
-// products_routes(app);
-// orders_routes(app);
-// users_routes(app);
+users_routes(app);
+products_routes(app);
+orders_routes(app);
 
 app.get("/", function (req: Request, res: Response) {
   res.send("Hello World from port 3003");

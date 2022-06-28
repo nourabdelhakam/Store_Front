@@ -10,7 +10,7 @@ const authorize = (req, res, next) => {
         const header_auth = req.headers.authorization;
         const token = header_auth ? header_auth.split(" ")[1] : "";
         // jwt.verify(token as string, process.env.TOKEN_SECRET as string)
-        const decoded = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
+        jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
         next();
     }
     catch (err) {
