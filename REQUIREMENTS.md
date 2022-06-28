@@ -25,7 +25,7 @@
 >> - first_name
 >> - last_name
 >> - password
->>> TABLE users ( id SERIAL PRIMARY KEY, first_name VARCHAR(150), last_name VARCHAR(200), password VARCHAR(100) )
+>>> TABLE users ( id SERIAL PRIMARY KEY, firstname VARCHAR(150), lastname VARCHAR(200), password VARCHAR(100) )
 
 >### Product
 >> - id

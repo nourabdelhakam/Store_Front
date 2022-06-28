@@ -31,8 +31,8 @@ const show_user_by_id = async (req: Request, res: Response) => {
 const create_user = async (req: Request, res: Response) => {
   try {
     const user_obj: Create_User = {
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       password: req.body.password,
     };
     const new_user: User = await userHandler.create_user(user_obj);
