@@ -22,7 +22,7 @@ class UserModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "SELECT * FRPM users";
+                const sql = "SELECT * FROM users";
                 const result = yield connection.query(sql);
                 connection.release();
                 return result.rows;
@@ -50,11 +50,11 @@ class UserModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "INSERT INTO users (first_name, last_name, password) VALUES($1, $2, $3, $4) RETURNING *";
+                const sql = "INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *";
                 const hashed_password = bcrypt_1.default.hashSync(user.password + pepper, parseInt(salt));
                 const result = yield connection.query(sql, [
-                    user.first_name,
-                    user.last_name,
+                    user.firstname,
+                    user.lastname,
                     hashed_password,
                 ]);
                 connection.release();

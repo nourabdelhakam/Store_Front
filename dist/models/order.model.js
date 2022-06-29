@@ -29,6 +29,8 @@ class OrderModel {
             }
         });
     }
+    // select all orders for a user (userId: number)
+    // Get current order by user id  WHERE user_id = ${userId} ORDER BY id DESC LIMIT 1
     show_order_by_id(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

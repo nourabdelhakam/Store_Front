@@ -13,6 +13,8 @@ export class OrderModel {
       throw new Error(`cannot get orders ${err}`);
     }
   }
+  // select all orders for a user (userId: number)
+  // Get current order by user id  WHERE user_id = ${userId} ORDER BY id DESC LIMIT 1
 
   async show_order_by_id(id: number): Promise<Order> {
     try {

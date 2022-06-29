@@ -20,12 +20,29 @@ exports.token = "";
 describe("User Routs", () => {
     it("create user", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request.post("/users").send({
-            first_name: "noura",
-            last_name: "mohamed",
+            firstname: "noura",
+            lastname: "mohamed",
             password: "passWord123",
         });
         exports.token = res.body;
-        console.log(exports.token);
+        expect(res.status).toBe(200);
+    }));
+    it("get users list", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get("/users")
+            .set("Authorization", "Bearer " + exports.token);
+        expect(res.body[0].id).toEqual(2);
+    }));
+    it("get user by id", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get("/users/2")
+            .set("Authorization", "Bearer " + exports.token);
+        expect(res.body.firstname).toEqual("noura");
+    }));
+    it("delets user", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .delete("/users/1")
+            .set("Authorization", "Bearer " + exports.token);
         expect(res.status).toBe(200);
     }));
 });

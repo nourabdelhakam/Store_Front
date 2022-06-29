@@ -4,6 +4,7 @@
 >> - all_users '/users' [GET]
 >> - show_user_by_id '/users/:id' [GET]
 >> - create_user '/users' [POST]
+>> - update_user_info '/updateduser' [POST]
 >> - delete_user '/users/:id' [DELETE]
 >### Products
 >> - all_products '/products' [GET]
@@ -46,3 +47,8 @@
 >> - order_id
 >> - product_id
 >>> TABLE product_order ( id SERIAL PRIMARY KEY, quantity integer NOT NULL, order_id integer foreign key to orders table, product_id integer foreign key to products table )
+
+
+"test": "set NODE_ENV=test&& db-migrate --env test up && jasmine-ts && db-migrate --env test down",
+
+"test": "set NODE_ENV=test&& db-migrate up --env test && tsc && jasmine && db-migrate reset",

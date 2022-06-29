@@ -39,8 +39,8 @@ const show_user_by_id = (req, res) => __awaiter(void 0, void 0, void 0, function
 const create_user = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user_obj = {
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             password: req.body.password,
         };
         const new_user = yield userHandler.create_user(user_obj);

@@ -44,6 +44,7 @@ const create_user = async (req: Request, res: Response) => {
   }
 };
 
+
 const delete_user = async (req: Request, res: Response) => {
   try {
     const remove: User = await userHandler.delete_user(

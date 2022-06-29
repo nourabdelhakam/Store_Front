@@ -9,7 +9,7 @@ export class UserModel {
   async all_users(): Promise<User[]> {
     try {
       const connection = await Client.connect();
-      const sql = "SELECT * FRPM users";
+      const sql = "SELECT * FROM users";
       const result = await connection.query(sql);
       connection.release();
       return result.rows;
@@ -34,7 +34,7 @@ export class UserModel {
     try {
       const connection = await Client.connect();
       const sql =
-        "INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3, $4) RETURNING *";
+        "INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *";
       const hashed_password: string = bcrypt.hashSync(
         user.password + pepper,
         parseInt(salt)
