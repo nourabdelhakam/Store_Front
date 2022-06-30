@@ -19,7 +19,7 @@ class OrderModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "SELECT * FRPM orders";
+                const sql = "SELECT * FROM orders";
                 const result = yield connection.query(sql);
                 connection.release();
                 return result.rows;
@@ -29,23 +29,36 @@ class OrderModel {
             }
         });
     }
-    // select all orders for a user (userId: number)
-    // Get current order by user id  WHERE user_id = ${userId} ORDER BY id DESC LIMIT 1
-    show_order_by_id(id) {
+    show_orders_by_user_id(user_id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "SELECT * FROM orders WHERE id=($1)";
-                const result = yield connection.query(sql, [id]);
+                const sql = "SELECT * FROM orders WHERE user_id=($1)";
+                const result = yield connection.query(sql, [user_id]);
                 connection.release();
-                return result.rows[0];
+                return result.rows;
             }
             catch (err) {
-                throw new Error(`Could not find order with id: ${id}. Error: ${err}`);
+                throw new Error(`Could not find order with id: ${user_id}. Error: ${err}`);
             }
         });
     }
-    show_order_by_status(status) {
+    show_user_orders_by_status(user_id, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const connection = yield database_1.default.connect();
+                const sql = "SELECT * FROM orders WHERE user_id=($1) AND status=($2) RETURNING *";
+                const result = yield connection.query(sql, [user_id, status]);
+                connection.release();
+                return result.rows;
+            }
+            catch (err) {
+                throw new Error(`Could not find order belong to user with id : 
+        ${user_id} with status: ${status}. Error: ${err}`);
+            }
+        });
+    }
+    show_orders_by_status(status) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
@@ -59,17 +72,17 @@ class OrderModel {
             }
         });
     }
-    create_order(order) {
+    update_order_status(id, order) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *";
-                const result = yield connection.query(sql, [order.user_id, order.status]);
+                const sql = "UPDATE orders SET status=$1 WHERE id=$2 RETURNING *";
+                const result = yield connection.query(sql, [order.status, id]);
                 connection.release();
                 return result.rows[0];
             }
             catch (err) {
-                throw new Error(`Could not add new order. Error: ${err}`);
+                throw new Error(`Could not update the order. Error: ${err}`);
             }
         });
     }
@@ -87,21 +100,39 @@ class OrderModel {
             }
         });
     }
-    add_new_product(product) {
+    //   async create_order(product: Add_Order): Promise<Add_Order> {
+    //     try {
+    //       const connection = await Client.connect();
+    //       const sql =
+    //         "INSERT INTO product_order (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
+    //       const result = await connection.query(sql, [
+    //         product.quantity,
+    //         product.order_id,
+    //         product.product_id,
+    //       ]);
+    //       connection.release();
+    //       return result.rows[0];
+    //     } catch (err) {
+    //       throw new Error(
+    //         `${err}. Could not add the product ${product} to the order ${product.order_id}. `
+    //       );
+    //     }
+    //   }
+    // }
+    create_order(product) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "INSERT INTO product_order (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
+                const sql = "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *";
                 const result = yield connection.query(sql, [
-                    product.quantity,
-                    product.order_id,
-                    product.product_id,
+                    product.user_id,
+                    product.status,
                 ]);
                 connection.release();
                 return result.rows[0];
             }
             catch (err) {
-                throw new Error(`${err}. Could not add the product ${product} to the order ${product.order_id}. `);
+                throw new Error(`${err}. Could not add the product ${product} to the order . `);
             }
         });
     }

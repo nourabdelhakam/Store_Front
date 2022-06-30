@@ -25,6 +25,7 @@ describe("User Routs", () => {
             password: "passWord123",
         });
         exports.token = res.body;
+        console.log(exports.token);
         expect(res.status).toBe(200);
     }));
     it("get users list", () => __awaiter(void 0, void 0, void 0, function* () {

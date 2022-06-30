@@ -1,11 +1,11 @@
-import client from "../database";
-import { Order, Add_Product } from "../types/order.type";
+import Client from "../database";
+import { Order, Add_Order } from "../types/order.type";
 
 export class OrderModel {
   async all_orders(): Promise<Order[]> {
     try {
-      const connection = await client.connect();
-      const sql = "SELECT * FRPM orders";
+      const connection = await Client.connect();
+      const sql = "SELECT * FROM orders";
       const result = await connection.query(sql);
       connection.release();
       return result.rows;
@@ -13,24 +13,43 @@ export class OrderModel {
       throw new Error(`cannot get orders ${err}`);
     }
   }
-  // select all orders for a user (userId: number)
-  // Get current order by user id  WHERE user_id = ${userId} ORDER BY id DESC LIMIT 1
 
-  async show_order_by_id(id: number): Promise<Order> {
+  async show_orders_by_user_id(user_id: number): Promise<Order[]> {
     try {
-      const connection = await client.connect();
-      const sql = "SELECT * FROM orders WHERE id=($1)";
-      const result = await connection.query(sql, [id]);
+      const connection = await Client.connect();
+      const sql = "SELECT * FROM orders WHERE user_id=($1)";
+      const result = await connection.query(sql, [user_id]);
       connection.release();
-      return result.rows[0];
+      return result.rows;
     } catch (err) {
-      throw new Error(`Could not find order with id: ${id}. Error: ${err}`);
+      throw new Error(
+        `Could not find order with id: ${user_id}. Error: ${err}`
+      );
     }
   }
 
-  async show_order_by_status(status: string): Promise<Order[]> {
+  async show_user_orders_by_status(
+    user_id: number,
+    status: string
+  ): Promise<Order[]> {
     try {
-      const connection = await client.connect();
+      const connection = await Client.connect();
+      const sql =
+        "SELECT * FROM orders WHERE user_id=($1) AND status=($2) RETURNING *";
+      const result = await connection.query(sql, [user_id, status]);
+      connection.release();
+      return result.rows;
+    } catch (err) {
+      throw new Error(
+        `Could not find order belong to user with id : 
+        ${user_id} with status: ${status}. Error: ${err}`
+      );
+    }
+  }
+
+  async show_orders_by_status(status: string): Promise<Order[]> {
+    try {
+      const connection = await Client.connect();
       const sql = "SELECT * FROM orders WHERE status=($1)";
       const result = await connection.query(sql, [status]);
       connection.release();
@@ -42,22 +61,21 @@ export class OrderModel {
     }
   }
 
-  async create_order(order: Order): Promise<Order> {
+  async update_order_status(id: number, order: Order): Promise<Order> {
     try {
-      const connection = await client.connect();
-      const sql =
-        "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *";
-      const result = await connection.query(sql, [order.user_id, order.status]);
+      const connection = await Client.connect();
+      const sql = "UPDATE orders SET status=$1 WHERE id=$2 RETURNING *";
+      const result = await connection.query(sql, [order.status, id]);
       connection.release();
       return result.rows[0];
     } catch (err) {
-      throw new Error(`Could not add new order. Error: ${err}`);
+      throw new Error(`Could not update the order. Error: ${err}`);
     }
   }
 
   async delete_order(id: number): Promise<Order> {
     try {
-      const connection = await client.connect();
+      const connection = await Client.connect();
       const sql = "DELETE FROM orders WHERE id=($1) RETURNING *";
       const result = await connection.query(sql, [id]);
       connection.release();
@@ -69,21 +87,40 @@ export class OrderModel {
     }
   }
 
-  async add_new_product(product: Add_Product): Promise<Add_Product> {
+  //   async create_order(product: Add_Order): Promise<Add_Order> {
+  //     try {
+  //       const connection = await Client.connect();
+  //       const sql =
+  //         "INSERT INTO product_order (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
+  //       const result = await connection.query(sql, [
+  //         product.quantity,
+  //         product.order_id,
+  //         product.product_id,
+  //       ]);
+  //       connection.release();
+  //       return result.rows[0];
+  //     } catch (err) {
+  //       throw new Error(
+  //         `${err}. Could not add the product ${product} to the order ${product.order_id}. `
+  //       );
+  //     }
+  //   }
+  // }
+
+  async create_order(product: Order): Promise<Order> {
     try {
-      const connection = await client.connect();
+      const connection = await Client.connect();
       const sql =
-        "INSERT INTO product_order (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
+        "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *";
       const result = await connection.query(sql, [
-        product.quantity,
-        product.order_id,
-        product.product_id,
+        product.user_id,
+        product.status,
       ]);
       connection.release();
       return result.rows[0];
     } catch (err) {
       throw new Error(
-        `${err}. Could not add the product ${product} to the order ${product.order_id}. `
+        `${err}. Could not add the product ${product} to the order . `
       );
     }
   }

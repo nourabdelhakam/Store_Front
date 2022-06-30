@@ -1,11 +1,8 @@
 import supertest from "supertest";
 import app from "../../server";
-import client from "../../database";
-
-import { UserModel } from "../../models/user.model";
 
 const request = supertest(app);
-export let token: string = "";
+export let token = "";
 
 describe("User Routs", () => {
   it("create user", async () => {
@@ -15,6 +12,8 @@ describe("User Routs", () => {
       password: "passWord123",
     });
     token = res.body;
+    console.log(token);
+
     expect(res.status).toBe(200);
   });
 

@@ -21,9 +21,9 @@ const indexAllOrders = (_req, res) => __awaiter(void 0, void 0, void 0, function
         res.json(err);
     }
 });
-const show_order_by_user_id = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const show_orders_by_user_id = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const order_by_user_id = yield orderHandler.show_order_by_id(req.params.user_id);
+        const order_by_user_id = yield orderHandler.show_orders_by_user_id(req.params.user_id);
         res.json(order_by_user_id);
     }
     catch (err) {
@@ -31,24 +31,34 @@ const show_order_by_user_id = (req, res) => __awaiter(void 0, void 0, void 0, fu
         res.json(err);
     }
 });
-const show_order_by_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const show_user_orders_by_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const order_by_status = yield orderHandler.show_order_by_status(req.params.status);
-        res.json(order_by_status);
+        const user_orders_by_status = yield orderHandler.show_user_orders_by_status(req.params.user_id, req.params.status);
+        res.json(user_orders_by_status);
     }
     catch (err) {
         res.status(400);
         res.json(err);
     }
 });
-const create_order = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const show_orders_by_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const orders_by_status = yield orderHandler.show_orders_by_status(req.params.status);
+        res.json(orders_by_status);
+    }
+    catch (err) {
+        res.status(400);
+        res.json(err);
+    }
+});
+const update_order_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const order_obj = {
             user_id: req.body.user_id,
             status: req.body.status,
         };
-        const new_order = yield orderHandler.create_order(order_obj);
-        res.json(new_order);
+        const update = yield orderHandler.update_order_status(req.params.id, order_obj);
+        res.json(update);
     }
     catch (err) {
         res.status(400);
@@ -65,14 +75,27 @@ const delete_order = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.json(err);
     }
 });
-const add_product = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// const create_order = async (req: Request, res: Response) => {
+//   try {
+//     const prod_obj: Add_Order = {
+//       quantity: req.body.quantity,
+//       order_id: req.body.order_id,
+//       product_id: req.body.product_id,
+//     };
+//     const new_prod = await orderHandler.create_order(prod_obj);
+//     res.json(new_prod);
+//   } catch (err) {
+//     res.status(400);
+//     res.json(err);
+//   }
+// };
+const create_order = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const prod_obj = {
-            quantity: req.body.quantity,
-            order_id: req.body.order_id,
-            product_id: req.body.product_id,
+            user_id: req.body.user_id,
+            status: req.body.status,
         };
-        const new_prod = yield orderHandler.add_new_product(prod_obj);
+        const new_prod = yield orderHandler.create_order(prod_obj);
         res.json(new_prod);
     }
     catch (err) {
@@ -82,8 +105,10 @@ const add_product = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 const orders_routes = (app) => {
     app.get("/orders", indexAllOrders);
-    app.get("/orders/latest/:user_id", show_order_by_user_id);
-    app.get("/orders/:status", show_order_by_status);
+    app.get("/orders/latest/:user_id", show_orders_by_user_id);
+    app.get("/orders/:status/:user_id", show_user_orders_by_status);
+    app.get("/orders/:id", update_order_status);
+    app.delete("/orders/:id", delete_order);
     app.post("/orders", create_order);
     app.delete("/orders/:id", delete_order);
 };
