@@ -19,7 +19,7 @@ class ProductModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "SELECT * FRPM products";
+                const sql = "SELECT * FROM products";
                 const result = yield connection.query(sql);
                 connection.release();
                 return result.rows;

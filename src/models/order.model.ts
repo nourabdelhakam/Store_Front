@@ -2,6 +2,24 @@ import Client from "../database";
 import { Order, Add_Order } from "../types/order.type";
 
 export class OrderModel {
+  async create_order(product: Order): Promise<Order> {
+    try {
+      const connection = await Client.connect();
+      const sql =
+        "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *";
+      const result = await connection.query(sql, [
+        product.user_id,
+        product.status,
+      ]);
+      connection.release();
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(
+        `${err}. Could not add the product ${product} to the order . `
+      );
+    }
+  }
+
   async all_orders(): Promise<Order[]> {
     try {
       const connection = await Client.connect();
@@ -83,44 +101,6 @@ export class OrderModel {
     } catch (err) {
       throw new Error(
         ` Error: ${err}. Could not delete the order with the id: ${id}.`
-      );
-    }
-  }
-
-  //   async create_order(product: Add_Order): Promise<Add_Order> {
-  //     try {
-  //       const connection = await Client.connect();
-  //       const sql =
-  //         "INSERT INTO product_order (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *";
-  //       const result = await connection.query(sql, [
-  //         product.quantity,
-  //         product.order_id,
-  //         product.product_id,
-  //       ]);
-  //       connection.release();
-  //       return result.rows[0];
-  //     } catch (err) {
-  //       throw new Error(
-  //         `${err}. Could not add the product ${product} to the order ${product.order_id}. `
-  //       );
-  //     }
-  //   }
-  // }
-
-  async create_order(product: Order): Promise<Order> {
-    try {
-      const connection = await Client.connect();
-      const sql =
-        "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *";
-      const result = await connection.query(sql, [
-        product.user_id,
-        product.status,
-      ]);
-      connection.release();
-      return result.rows[0];
-    } catch (err) {
-      throw new Error(
-        `${err}. Could not add the product ${product} to the order . `
       );
     }
   }

@@ -14,13 +14,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
+const _01_users_spec_1 = require("./01-users_spec");
 const request = (0, supertest_1.default)(server_1.default);
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX29iaiI6eyJpZCI6MzYsImZpcnN0bmFtZSI6Im5vdXJhIiwibGFzdG5hbWUiOiJtb2hhbWVkIiwicGFzc3dvcmQiOiIkMmIkMTAkbzA2cld3bGRCTTRJRzhWYTFUSlBwZTNJY2Rra2RqdVJwZ2cuUDZPTFVocVFDZ3cwRkd0NHUifSwiaWF0IjoxNjU2NTU1MTk1fQ.YTnJjz6UbjtolSC_GfiDqIV169BmT1c1n_Ha_1xJ_uY';
 describe("Order Routs", () => {
     it("create order", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request.post("/orders").send({
-            quantity: 1,
+            user_id: 44,
+            status: "compeleted",
         });
+        expect(res.status).toBe(200);
+    }));
+    it("get orders list", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get("/orders")
+            .set("Authorization", "Bearer " + _01_users_spec_1.token);
+        console.log("log", res.body);
+        expect(res.body[0].id).toEqual(35);
+    }));
+    it("show orders by user_id", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get("/orders/latest/44")
+            .set("Authorization", "Bearer " + _01_users_spec_1.token);
+        console.log(_01_users_spec_1.token);
+        expect(res.body[0].user_id).toEqual(44);
+    }));
+    it("update order", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request.post("/orders/").send({
+            user_id: 44,
+            status: "active",
+        });
+        expect(res.status).toBe(200);
+    }));
+    it("delets order", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .delete("/orders/35")
+            .set("Authorization", "Bearer " + _01_users_spec_1.token);
         expect(res.status).toBe(200);
     }));
 });

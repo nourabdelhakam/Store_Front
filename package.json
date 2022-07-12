@@ -10,7 +10,7 @@
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "tsc": "npx tsc",
     "jasmine": "jasmine",
-    "test": "set NODE_ENV=test&& db-migrate up --env test && tsc && jasmine && db-migrate reset",
+    "test": "set NODE_ENV=test&& db-migrate up --env test && npm run build && npm run jasmine && db-migrate down --env test",
     "prettier": "prettier --write src/**/*.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"

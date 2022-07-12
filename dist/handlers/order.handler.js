@@ -110,6 +110,5 @@ const orders_routes = (app) => {
     app.get("/orders/:id", update_order_status);
     app.delete("/orders/:id", delete_order);
     app.post("/orders", create_order);
-    app.delete("/orders/:id", delete_order);
 };
 exports.default = orders_routes;

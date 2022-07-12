@@ -5,7 +5,7 @@ export class ProductModel {
   async all_products(): Promise<Product[]> {
     try {
       const connection = await Client.connect();
-      const sql = "SELECT * FRPM products";
+      const sql = "SELECT * FROM products";
       const result = await connection.query(sql);
       connection.release();
       return result.rows;
