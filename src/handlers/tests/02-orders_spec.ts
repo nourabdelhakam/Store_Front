@@ -5,13 +5,13 @@ import { token } from "./01-users_spec";
 const request = supertest(app);
 
 describe("Order Routs", () => {
-  it("create order", async () => {
-    const res = await request.post("/orders").send({
-      user_id: 44,
-      status: "compeleted",
-    });
-    expect(res.status).toBe(200);
-  });
+  // it("create order", async () => {
+  //   const res = await request.post("/orders").send({
+  //     user_id: 44,
+  //     status: "compeleted",
+  //   });
+  //   expect(res.status).toBe(200);
+  // });
 
   it("get orders list", async () => {
     const res = await request
@@ -40,7 +40,7 @@ describe("Order Routs", () => {
 
   it("delets order", async () => {
     const res = await request
-      .delete("/orders/35")
+      .delete("/orders/113")
       .set("Authorization", "Bearer " + token);
 
     expect(res.status).toBe(200);

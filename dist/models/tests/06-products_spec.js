@@ -29,7 +29,7 @@ describe("Product Modal", () => {
         expect(res === null || res === void 0 ? void 0 : res.id).toEqual(24);
     }));
     it("should delete a product", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield product.delete_product(24);
+        const res = yield product.delete_product(25);
         expect(res.id).toBe(24);
     }));
 });

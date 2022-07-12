@@ -3,13 +3,13 @@ import { OrderModel } from "../order.model";
 const order = new OrderModel();
 
 describe("Order Model", () => {
-  it("should create new order", async () => {
-    const res = await order.create_order({
-      user_id: 44,
-      status: "compeleted",
-    });
-    expect(res.id).toBeTruthy();
-  });
+  // it("should create new order", async () => {
+  //   const res = await order.create_order({
+  //     user_id: 44,
+  //     status: "compeleted",
+  //   });
+  //   expect(res.id).toBeTruthy();
+  // });
 
   it("should get all orders list", async () => {
     const res = await order.all_orders();
@@ -23,7 +23,7 @@ describe("Order Model", () => {
   });
 
   it("should delete a order", async () => {
-    const res = await order.delete_order(44);
+    const res = await order.delete_order(109);
     expect(res.id).toBe(44);
   });
 });

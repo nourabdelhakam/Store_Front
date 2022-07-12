@@ -18,23 +18,22 @@ const server_1 = __importDefault(require("../../server"));
 const request = (0, supertest_1.default)(server_1.default);
 exports.token = "";
 describe("User Routs", () => {
-    it("create user", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.post("/users").send({
-            id: 1,
-            firstname: "noura",
-            lastname: "mohamed",
-            password: "passWord123",
-        });
-        exports.token = res.body;
-        console.log(exports.token);
-        expect(res.status).toBe(200);
-    }));
+    // it("create user", async () => {
+    //   const res = await request.post("/users").send({
+    //     id: 1,
+    //     firstname: "noura",
+    //     lastname: "mohamed",
+    //     password: "passWord123",
+    //   });
+    //   token = res.body;
+    //   expect(res.status).toBe(200);
+    // });
     it("get users list", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
             .get("/users")
             .set("Authorization", "Bearer " + exports.token);
         console.log("users", res.body);
-        expect(res.body[0].id).toEqual(44);
+        expect(res.body.length).toBeGreaterThan(0);
     }));
     it("get user by id", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
@@ -42,10 +41,10 @@ describe("User Routs", () => {
             .set("Authorization", "Bearer " + exports.token);
         expect(res.body.firstname).toEqual("noura");
     }));
-    //   it("delets user", async () => {
-    //     const res = await request
-    //       .delete("/users/44")
-    //       .set("Authorization", "Bearer " + token);
-    //     expect(res.status).toBe(200);
-    //   });
+    it("delets user", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .delete("/users/43")
+            .set("Authorization", "Bearer " + exports.token);
+        expect(res.status).toBe(200);
+    }));
 });

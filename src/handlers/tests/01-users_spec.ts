@@ -5,18 +5,16 @@ const request = supertest(app);
 export let token = "";
 
 describe("User Routs", () => {
-  it("create user", async () => {
-    const res = await request.post("/users").send({
-      id: 1,
-      firstname: "noura",
-      lastname: "mohamed",
-      password: "passWord123",
-    });
-    token = res.body;
-    console.log(token);
-
-    expect(res.status).toBe(200);
-  });
+  // it("create user", async () => {
+  //   const res = await request.post("/users").send({
+  //     id: 1,
+  //     firstname: "noura",
+  //     lastname: "mohamed",
+  //     password: "passWord123",
+  //   });
+  //   token = res.body;
+  //   expect(res.status).toBe(200);
+  // });
 
   it("get users list", async () => {
     const res = await request
@@ -24,7 +22,7 @@ describe("User Routs", () => {
       .set("Authorization", "Bearer " + token);
     console.log("users", res.body);
 
-    expect(res.body[0].id).toEqual(44);
+    expect(res.body.length).toBeGreaterThan(0);
   });
 
   it("get user by id", async () => {
@@ -34,11 +32,11 @@ describe("User Routs", () => {
     expect(res.body.firstname).toEqual("noura");
   });
 
-  //   it("delets user", async () => {
-  //     const res = await request
-  //       .delete("/users/44")
-  //       .set("Authorization", "Bearer " + token);
+    it("delets user", async () => {
+      const res = await request
+        .delete("/users/43")
+        .set("Authorization", "Bearer " + token);
 
-  //     expect(res.status).toBe(200);
-  //   });
+      expect(res.status).toBe(200);
+    });
 });

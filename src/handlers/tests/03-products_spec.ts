@@ -33,7 +33,7 @@ describe("Product Routs", () => {
   });
 
   it("delets product", async () => {
-    const res = await request.delete("/products/9");
+    const res = await request.delete("/products/29");
 
     expect(res.status).toBe(200);
   });

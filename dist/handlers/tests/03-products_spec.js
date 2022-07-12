@@ -41,7 +41,7 @@ describe("Product Routs", () => {
         });
     }));
     it("delets product", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.delete("/products/9");
+        const res = yield request.delete("/products/29");
         expect(res.status).toBe(200);
     }));
 });

@@ -23,7 +23,7 @@ describe("Product Modal", () => {
   });
 
   it("should delete a product", async () => {
-    const res = await product.delete_product(24);
+    const res = await product.delete_product(25);
     expect(res.id).toBe(24);
   });
 });
