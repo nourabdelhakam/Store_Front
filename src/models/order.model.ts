@@ -46,39 +46,6 @@ export class OrderModel {
     }
   }
 
-  async show_user_orders_by_status(
-    user_id: number,
-    status: string
-  ): Promise<Order[]> {
-    try {
-      const connection = await Client.connect();
-      const sql =
-        "SELECT * FROM orders WHERE user_id=($1) AND status=($2) RETURNING *";
-      const result = await connection.query(sql, [user_id, status]);
-      connection.release();
-      return result.rows;
-    } catch (err) {
-      throw new Error(
-        `Could not find order belong to user with id : 
-        ${user_id} with status: ${status}. Error: ${err}`
-      );
-    }
-  }
-
-  async show_orders_by_status(status: string): Promise<Order[]> {
-    try {
-      const connection = await Client.connect();
-      const sql = "SELECT * FROM orders WHERE status=($1)";
-      const result = await connection.query(sql, [status]);
-      connection.release();
-      return result.rows;
-    } catch (err) {
-      throw new Error(
-        `Could not find order with status: ${status}. Error: ${err}`
-      );
-    }
-  }
-
   async update_order_status(id: number, order: Order): Promise<Order> {
     try {
       const connection = await Client.connect();

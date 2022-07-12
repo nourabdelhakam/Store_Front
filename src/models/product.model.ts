@@ -26,20 +26,6 @@ export class ProductModel {
     }
   }
 
-  async show_product_by_category(category: string): Promise<Product[]> {
-    try {
-      const connection = await Client.connect();
-      const sql = "SELECT * FROM products WHERE category=($1)";
-      const result = await connection.query(sql, [category]);
-      connection.release();
-      return result.rows;
-    } catch (err) {
-      throw new Error(
-        ` Error: ${err}. Could not find the products with the category: ${category}.`
-      );
-    }
-  }
-
   async create_product(product: Create_Product): Promise<Product> {
     try {
       const connection = await Client.connect();

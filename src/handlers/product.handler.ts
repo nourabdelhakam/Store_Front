@@ -25,20 +25,6 @@ const show_product_by_id = async (req: Request, res: Response) => {
     res.json(err);
   }
 };
-
-const show_product_by_cat = async (req: Request, res: Response) => {
-  try {
-    const product_by_cat: Product[] =
-      await productHandler.show_product_by_category(
-        req.params.category as unknown as string
-      );
-    res.json(product_by_cat);
-  } catch (err) {
-    res.status(400);
-    res.json(err);
-  }
-};
-
 const create_product = async (req: Request, res: Response) => {
   try {
     const prod_obj: Create_Product = {
@@ -69,7 +55,6 @@ const delete_product = async (req: Request, res: Response) => {
 const products_routes = (app: express.Application) => {
   app.get("/products", indexAllProducts);
   app.get("/products/:id", show_product_by_id);
-  app.get("/products/category/:category", show_product_by_cat);
   app.post("/products", create_product);
   app.delete("/products/:id", delete_product);
 };
