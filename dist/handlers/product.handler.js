@@ -31,16 +31,6 @@ const show_product_by_id = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.json(err);
     }
 });
-const show_product_by_cat = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const product_by_cat = yield productHandler.show_product_by_category(req.params.category);
-        res.json(product_by_cat);
-    }
-    catch (err) {
-        res.status(400);
-        res.json(err);
-    }
-});
 const create_product = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const prod_obj = {
@@ -69,7 +59,6 @@ const delete_product = (req, res) => __awaiter(void 0, void 0, void 0, function*
 const products_routes = (app) => {
     app.get("/products", indexAllProducts);
     app.get("/products/:id", show_product_by_id);
-    app.get("/products/category/:category", show_product_by_cat);
     app.post("/products", create_product);
     app.delete("/products/:id", delete_product);
 };

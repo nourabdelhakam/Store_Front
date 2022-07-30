@@ -31,26 +31,6 @@ const show_orders_by_user_id = (req, res) => __awaiter(void 0, void 0, void 0, f
         res.json(err);
     }
 });
-const show_user_orders_by_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user_orders_by_status = yield orderHandler.show_user_orders_by_status(req.params.user_id, req.params.status);
-        res.json(user_orders_by_status);
-    }
-    catch (err) {
-        res.status(400);
-        res.json(err);
-    }
-});
-const show_orders_by_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const orders_by_status = yield orderHandler.show_orders_by_status(req.params.status);
-        res.json(orders_by_status);
-    }
-    catch (err) {
-        res.status(400);
-        res.json(err);
-    }
-});
 const update_order_status = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const order_obj = {
@@ -75,20 +55,6 @@ const delete_order = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.json(err);
     }
 });
-// const create_order = async (req: Request, res: Response) => {
-//   try {
-//     const prod_obj: Add_Order = {
-//       quantity: req.body.quantity,
-//       order_id: req.body.order_id,
-//       product_id: req.body.product_id,
-//     };
-//     const new_prod = await orderHandler.create_order(prod_obj);
-//     res.json(new_prod);
-//   } catch (err) {
-//     res.status(400);
-//     res.json(err);
-//   }
-// };
 const create_order = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const prod_obj = {
@@ -106,7 +72,6 @@ const create_order = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 const orders_routes = (app) => {
     app.get("/orders", indexAllOrders);
     app.get("/orders/latest/:user_id", show_orders_by_user_id);
-    app.get("/orders/:status/:user_id", show_user_orders_by_status);
     app.get("/orders/:id", update_order_status);
     app.delete("/orders/:id", delete_order);
     app.post("/orders", create_order);

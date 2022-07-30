@@ -18,16 +18,17 @@ const server_1 = __importDefault(require("../../server"));
 const request = (0, supertest_1.default)(server_1.default);
 exports.token = "";
 describe("User Routs", () => {
-    // it("create user", async () => {
-    //   const res = await request.post("/users").send({
-    //     id: 1,
-    //     firstname: "noura",
-    //     lastname: "mohamed",
-    //     password: "passWord123",
-    //   });
-    //   token = res.body;
-    //   expect(res.status).toBe(200);
-    // });
+    it("create user", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request.post("/users").send({
+            id: 1,
+            firstname: "noura",
+            lastname: "mohamed",
+            password: "passWord123",
+        });
+        exports.token = res.body;
+        console.log(exports.token);
+        expect(res.status).toBe(200);
+    }));
     it("get users list", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
             .get("/users")

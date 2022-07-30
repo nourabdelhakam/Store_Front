@@ -60,35 +60,6 @@ class OrderModel {
             }
         });
     }
-    show_user_orders_by_status(user_id, status) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const connection = yield database_1.default.connect();
-                const sql = "SELECT * FROM orders WHERE user_id=($1) AND status=($2) RETURNING *";
-                const result = yield connection.query(sql, [user_id, status]);
-                connection.release();
-                return result.rows;
-            }
-            catch (err) {
-                throw new Error(`Could not find order belong to user with id : 
-        ${user_id} with status: ${status}. Error: ${err}`);
-            }
-        });
-    }
-    show_orders_by_status(status) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const connection = yield database_1.default.connect();
-                const sql = "SELECT * FROM orders WHERE status=($1)";
-                const result = yield connection.query(sql, [status]);
-                connection.release();
-                return result.rows;
-            }
-            catch (err) {
-                throw new Error(`Could not find order with status: ${status}. Error: ${err}`);
-            }
-        });
-    }
     update_order_status(id, order) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

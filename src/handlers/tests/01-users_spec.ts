@@ -13,6 +13,8 @@ describe("User Routs", () => {
       password: "passWord123",
     });
     token = res.body;
+    console.log(token);
+    
     expect(res.status).toBe(200);
   });
 

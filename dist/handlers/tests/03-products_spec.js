@@ -16,15 +16,15 @@ const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
 const request = (0, supertest_1.default)(server_1.default);
 describe("Product Routs", () => {
-    // it("create product", async () => {
-    //     const res = await request.post("/products").send({
-    //       name: "productOne",
-    //       price: 100,
-    //       category: "electronics",
-    //     });
-    //     console.log(res.body);
-    //     expect(res.status).toBe(200);
-    //   });
+    it("create product", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request.post("/products").send({
+            name: "productOne",
+            price: 100,
+            category: "electronics",
+        });
+        console.log(res.body);
+        expect(res.status).toBe(200);
+    }));
     it("get products list", () => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         const res = yield request.get("/products");

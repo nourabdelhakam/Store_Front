@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const order_model_1 = require("../order.model");
 const order = new order_model_1.OrderModel();
 describe("Order Model", () => {
-    // it("should create new order", async () => {
-    //   const res = await order.create_order({
-    //     user_id: 44,
-    //     status: "compeleted",
-    //   });
-    //   expect(res.id).toBeTruthy();
-    // });
+    it("should create new order", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield order.create_order({
+            user_id: 44,
+            status: "compeleted",
+        });
+        expect(res.id).toBeTruthy();
+    }));
     it("should get all orders list", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield order.all_orders();
         console.log("order res", res);

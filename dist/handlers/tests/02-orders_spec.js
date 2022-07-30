@@ -17,13 +17,13 @@ const server_1 = __importDefault(require("../../server"));
 const _01_users_spec_1 = require("./01-users_spec");
 const request = (0, supertest_1.default)(server_1.default);
 describe("Order Routs", () => {
-    // it("create order", async () => {
-    //   const res = await request.post("/orders").send({
-    //     user_id: 44,
-    //     status: "compeleted",
-    //   });
-    //   expect(res.status).toBe(200);
-    // });
+    it("create order", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request.post("/orders").send({
+            user_id: 44,
+            status: "compeleted",
+        });
+        expect(res.status).toBe(200);
+    }));
     it("get orders list", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
             .get("/orders")

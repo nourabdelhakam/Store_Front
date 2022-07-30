@@ -12,14 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const product_model_1 = require("../product.model");
 const product = new product_model_1.ProductModel();
 describe("Product Modal", () => {
-    //   it("should create a new product", async () => {
-    //     const res = await product.create_product({
-    //       name: "productTwo",
-    //       price: 200,
-    //       category: "electronics2",
-    //     });
-    //     expect(res.id).toBeTruthy();
-    //   });
+    it("should create a new product", () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield product.create_product({
+            name: "productTwo",
+            price: 200,
+            category: "electronics2",
+        });
+        expect(res.id).toBeTruthy();
+    }));
     it("should get all products list", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield product.all_products();
         expect(res === null || res === void 0 ? void 0 : res.length).toBeGreaterThan(0);

@@ -43,20 +43,6 @@ class ProductModel {
             }
         });
     }
-    show_product_by_category(category) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const connection = yield database_1.default.connect();
-                const sql = "SELECT * FROM products WHERE category=($1)";
-                const result = yield connection.query(sql, [category]);
-                connection.release();
-                return result.rows;
-            }
-            catch (err) {
-                throw new Error(` Error: ${err}. Could not find the products with the category: ${category}.`);
-            }
-        });
-    }
     create_product(product) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
