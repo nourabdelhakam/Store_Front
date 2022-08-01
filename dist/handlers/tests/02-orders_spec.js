@@ -29,7 +29,7 @@ describe("Order Routs", () => {
             .get("/orders")
             .set("Authorization", "Bearer " + _01_users_spec_1.token);
         console.log("log", res.body);
-        expect(res.body[0].id).toEqual(35);
+        expect(res.body.length).toBeGreaterThan(0);
     }));
     it("show orders by user_id", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request

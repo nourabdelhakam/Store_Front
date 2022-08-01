@@ -28,8 +28,4 @@ describe("Order Model", () => {
         const res = yield order.show_orders_by_user_id(44);
         expect(res === null || res === void 0 ? void 0 : res.length).toBeGreaterThan(0);
     }));
-    it("should delete a order", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield order.delete_order(109);
-        expect(res.id).toBe(44);
-    }));
 });

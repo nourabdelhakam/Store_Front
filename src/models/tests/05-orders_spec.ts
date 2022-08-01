@@ -22,8 +22,4 @@ describe("Order Model", () => {
     expect(res?.length).toBeGreaterThan(0);
   });
 
-  it("should delete a order", async () => {
-    const res = await order.delete_order(109);
-    expect(res.id).toBe(44);
-  });
 });

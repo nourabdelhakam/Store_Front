@@ -9,23 +9,23 @@ describe("User Model", () => {
       lastname: "mohamed",
       password: "passWord123",
     });
-    expect(res.firstname).toEqual("noura")
+    expect(res.firstname).toEqual("noura");
   });
 
   it("should get all users list", async () => {
-    const res = await user.all_users()
-    console.log('res', res);
+    const res = await user.all_users();
+    console.log("res", res);
 
-    expect(res?.length).toBeGreaterThan(0)
-  })
+    expect(res?.length).toBeGreaterThan(0);
+  });
 
   it("should return a user by id", async () => {
-    const res = await user.show_user_by_id(39)
-    expect(res.lastname).toEqual("mohamed")
-  })
+    const res = await user.show_user_by_id(76);
+    expect(res.id).toBe(76);
+  });
 
   it("should delete a user", async () => {
-    const res = await user.delete_user(39)
-    expect(res.id).toBe(39);
+    const res = await user.delete_user(76);
+    expect(res.id).toBe(76);
   });
 });

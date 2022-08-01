@@ -5,15 +5,15 @@ const request = supertest(app);
 
 describe("Product Routs", () => {
   it("create product", async () => {
-      const res = await request.post("/products").send({
-        name: "productOne",
-        price: 100,
-        category: "electronics",
-      });
-      console.log(res.body);
-
-      expect(res.status).toBe(200);
+    const res = await request.post("/products").send({
+      name: "productOne",
+      price: 100,
+      category: "electronics",
     });
+    console.log(res.body);
+
+    expect(res.status).toBe(200);
+  });
 
   it("get products list", async () => {
     const res = await request.get("/products");
@@ -24,12 +24,7 @@ describe("Product Routs", () => {
 
   it("get product by id", async () => {
     const res = await request.get("/products/1");
-    expect(res.body).toEqual({
-      id: 1,
-      name: "productOne",
-      price: 100,
-      category: "electronics",
-    });
+    expect(res.status).toBe(200);
   });
 
   it("delets product", async () => {

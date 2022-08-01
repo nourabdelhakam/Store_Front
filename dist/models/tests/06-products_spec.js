@@ -24,12 +24,4 @@ describe("Product Modal", () => {
         const res = yield product.all_products();
         expect(res === null || res === void 0 ? void 0 : res.length).toBeGreaterThan(0);
     }));
-    it("should return a product by id", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield product.show_product_by_id(24);
-        expect(res === null || res === void 0 ? void 0 : res.id).toEqual(24);
-    }));
-    it("should delete a product", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield product.delete_product(25);
-        expect(res.id).toBe(24);
-    }));
 });

@@ -22,15 +22,15 @@ describe("User Model", () => {
     }));
     it("should get all users list", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield user.all_users();
-        console.log('res', res);
+        console.log("res", res);
         expect(res === null || res === void 0 ? void 0 : res.length).toBeGreaterThan(0);
     }));
     it("should return a user by id", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield user.show_user_by_id(39);
-        expect(res.lastname).toEqual("mohamed");
+        const res = yield user.show_user_by_id(75);
+        expect(res.id).toBe(75);
     }));
     it("should delete a user", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield user.delete_user(39);
-        expect(res.id).toBe(39);
+        const res = yield user.delete_user(75);
+        expect(res.id).toBe(75);
     }));
 });

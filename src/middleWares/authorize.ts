@@ -1,10 +1,14 @@
-import jsonwebtoken from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import jsonwebtoken from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
 
-export const authorizeToken = (req: Request, res: Response, next: NextFunction) => {
+export const authorizeToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const authHead: string | undefined = req.headers.authorization;
-    const token: string = authHead ? authHead.split(' ')[1] : '';
+    const token: string = authHead ? authHead.split(" ")[1] : "";
 
     const decoded: string | object = jsonwebtoken.verify(
       token,

@@ -14,7 +14,7 @@ describe("User Routs", () => {
     });
     token = res.body;
     console.log(token);
-    
+
     expect(res.status).toBe(200);
   });
 
@@ -34,11 +34,11 @@ describe("User Routs", () => {
     expect(res.body.firstname).toEqual("noura");
   });
 
-    it("delets user", async () => {
-      const res = await request
-        .delete("/users/43")
-        .set("Authorization", "Bearer " + token);
+  it("delets user", async () => {
+    const res = await request
+      .delete("/users/43")
+      .set("Authorization", "Bearer " + token);
 
-      expect(res.status).toBe(200);
-    });
+    expect(res.status).toBe(200);
+  });
 });
