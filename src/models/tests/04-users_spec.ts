@@ -18,14 +18,4 @@ describe("User Model", () => {
 
     expect(res?.length).toBeGreaterThan(0);
   });
-
-  it("should return a user by id", async () => {
-    const res = await user.show_user_by_id(76);
-    expect(res.id).toBe(76);
-  });
-
-  it("should delete a user", async () => {
-    const res = await user.delete_user(76);
-    expect(res.id).toBe(76);
-  });
 });

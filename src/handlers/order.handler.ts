@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { OrderModel } from "../models/order.model";
-import { Order, Add_Order } from "../types/order.type";
+import { Order } from "../types/order.type";
 
 const orderHandler = new OrderModel();
 

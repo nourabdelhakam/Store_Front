@@ -1,5 +1,5 @@
 import Client from "../database";
-import { Order, Add_Order } from "../types/order.type";
+import { Order } from "../types/order.type";
 
 export class OrderModel {
   async create_order(product: Order): Promise<Order> {
