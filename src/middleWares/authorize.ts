@@ -1,23 +1,24 @@
-import jsonwebtoken from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
-export const authorizeToken = (
+const authorizeToken = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   try {
     const authHead: string | undefined = req.headers.authorization;
+    if (!authHead) {
+      throw new Error("authorization header is not available");
+    }
     const token: string = authHead ? authHead.split(" ")[1] : "";
+    jwt.verify(token, process.env.TOKEN_SECRET as string);
 
-    const decoded: string | object = jsonwebtoken.verify(
-      token,
-      process.env.JWT_SECRET as string
-    );
-    res.locals.userData = decoded;
     next();
   } catch (err) {
-    // err.code = 401;
+    res.status(401).json(err);
     next(err);
   }
 };
+
+export default authorizeToken;

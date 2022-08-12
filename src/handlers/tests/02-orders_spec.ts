@@ -10,6 +10,8 @@ describe("Order Routs", () => {
       user_id: 44,
       status: "compeleted",
     });
+    console.log("order route res", res);
+
     expect(res.status).toBe(200);
   });
 

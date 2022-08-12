@@ -1,8 +1,9 @@
-# Udacity Storefront Backend Project
+# Udacity Storefront Backend Project backend API build in Nodejs for an online store.
 >## The Scripts nedded to test/satrt/build application:
 >> - npm run dev
 >> - npm run test
 >> - npm run lint
+>> - npm run lint:f => to fix issues
 >> - npm run prettier
 
 >## Used Technologies
@@ -13,6 +14,25 @@
 >> - jsonwebtoken for authentication and authorizations
 >> - jasmine for unit and endpoint testing
 >> - bcrypt for hashing passwords
+
+>## Getting Started
+>> - clone the repo using 
+// git clone https://github.com/nourabdelhakam/Store_Front.git
+// cd Storefront
+>> - install dependenscies
+// npm install
+>> - create databases
+>>> - connect to the postgres database
+// psql -U postgres -p 3010 postgres
+>>> -  create the databases (dev and test)
+// CREATE DATABASE store_dev;
+// CREATE DATABASE store_test;
+>> - run migrations
+// db-migrate up
+>> - run development server
+// npm run dev
+>> - run testing scripts
+// npm run test
 
 >## ENVIRONMENT VARIABLES
 >> - PORT=3003
