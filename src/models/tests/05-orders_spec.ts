@@ -21,5 +21,4 @@ describe("Order Model", () => {
     const res = await order.show_orders_by_user_id(44);
     expect(res?.length).toBeGreaterThan(0);
   });
-
 });

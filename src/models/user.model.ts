@@ -54,7 +54,7 @@ export class UserModel {
   async delete_user(id: number): Promise<User> {
     try {
       const connection = await Client.connect();
-      const sql = "DELETE FROM users WHERE id=($1) RETURNING *";
+      const sql = "DELETE FROM users WHERE id=($1)";
       const result = await connection.query(sql, [id]);
       connection.release();
       return result.rows[0];

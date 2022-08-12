@@ -69,7 +69,7 @@ class UserModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const connection = yield database_1.default.connect();
-                const sql = "DELETE FROM users WHERE id=($1) RETURNING *";
+                const sql = "DELETE FROM users WHERE id=($1)";
                 const result = yield connection.query(sql, [id]);
                 connection.release();
                 return result.rows[0];

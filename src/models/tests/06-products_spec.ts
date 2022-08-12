@@ -16,6 +16,4 @@ describe("Product Modal", () => {
     const res = await product.all_products();
     expect(res?.length).toBeGreaterThan(0);
   });
-
-
 });
