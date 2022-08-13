@@ -1,24 +1,25 @@
 import supertest from "supertest";
 import app from "../../server";
+import { token } from "./01-users_spec";
 
 const request = supertest(app);
 
 describe("Product Routs", () => {
   it("create product", async () => {
-    const res = await request.post("/products").send({
-      name: "productOne",
-      price: 100,
-      category: "electronics",
-    });
-    console.log(res.body);
+    const res = await request
+      .post("/products")
+      .send({
+        name: "productOne",
+        price: 100,
+        category: "electronics",
+      })
+      .set("Authorization", `Bearer ${token}`);
 
     expect(res.status).toBe(200);
   });
 
   it("get products list", async () => {
     const res = await request.get("/products");
-    console.log(res.body);
-
     expect(res.body?.length).toBeGreaterThan(0);
   });
 

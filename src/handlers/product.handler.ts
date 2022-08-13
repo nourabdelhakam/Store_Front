@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { ProductModel } from "../models/product.model";
 import { Product, Create_Product } from "../types/product.type";
+import authorizeToken from "../middleWares/authorize";
 
 const productHandler = new ProductModel();
 
@@ -55,7 +56,7 @@ const delete_product = async (req: Request, res: Response) => {
 const products_routes = (app: express.Application) => {
   app.get("/products", indexAllProducts);
   app.get("/products/:id", show_product_by_id);
-  app.post("/products", create_product);
+  app.post("/products", authorizeToken, create_product);
   app.delete("/products/:id", delete_product);
 };
 

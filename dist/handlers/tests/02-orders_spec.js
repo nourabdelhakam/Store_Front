@@ -18,11 +18,13 @@ const _01_users_spec_1 = require("./01-users_spec");
 const request = (0, supertest_1.default)(server_1.default);
 describe("Order Routs", () => {
     it("create order", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.post("/orders").send({
+        const res = yield request
+            .post("/orders")
+            .send({
             user_id: 44,
             status: "compeleted",
-        });
-        console.log("order route res", res);
+        })
+            .set("Authorization", `Bearer ${_01_users_spec_1.token}`);
         expect(res.status).toBe(200);
     }));
     it("get orders list", () => __awaiter(void 0, void 0, void 0, function* () {
@@ -40,10 +42,13 @@ describe("Order Routs", () => {
         expect(res.body[0].user_id).toEqual(44);
     }));
     it("update order", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.post("/orders/").send({
+        const res = yield request
+            .post("/orders/")
+            .send({
             user_id: 44,
             status: "active",
-        });
+        })
+            .set("Authorization", "Bearer " + _01_users_spec_1.token);
         expect(res.status).toBe(200);
     }));
     it("delets order", () => __awaiter(void 0, void 0, void 0, function* () {

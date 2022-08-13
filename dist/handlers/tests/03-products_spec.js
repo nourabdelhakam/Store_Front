@@ -14,21 +14,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
+const _01_users_spec_1 = require("./01-users_spec");
 const request = (0, supertest_1.default)(server_1.default);
 describe("Product Routs", () => {
     it("create product", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.post("/products").send({
+        const res = yield request
+            .post("/products")
+            .send({
             name: "productOne",
             price: 100,
             category: "electronics",
-        });
-        console.log(res.body);
+        })
+            .set("Authorization", `Bearer ${_01_users_spec_1.token}`);
         expect(res.status).toBe(200);
     }));
     it("get products list", () => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         const res = yield request.get("/products");
-        console.log(res.body);
         expect((_a = res.body) === null || _a === void 0 ? void 0 : _a.length).toBeGreaterThan(0);
     }));
     it("get product by id", () => __awaiter(void 0, void 0, void 0, function* () {

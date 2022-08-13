@@ -6,12 +6,13 @@ const request = supertest(app);
 
 describe("Order Routs", () => {
   it("create order", async () => {
-    const res = await request.post("/orders").send({
-      user_id: 44,
-      status: "compeleted",
-    });
-    console.log("order route res", res);
-
+    const res = await request
+      .post("/orders")
+      .send({
+        user_id: 44,
+        status: "compeleted",
+      })
+      .set("Authorization", `Bearer ${token}`);
     expect(res.status).toBe(200);
   });
 
@@ -33,10 +34,13 @@ describe("Order Routs", () => {
   });
 
   it("update order", async () => {
-    const res = await request.post("/orders/").send({
-      user_id: 44,
-      status: "active",
-    });
+    const res = await request
+      .post("/orders/")
+      .send({
+        user_id: 44,
+        status: "active",
+      })
+      .set("Authorization", "Bearer " + token);
     expect(res.status).toBe(200);
   });
 

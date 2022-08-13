@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { OrderModel } from "../models/order.model";
 import { Order } from "../types/order.type";
+import authorizeToken from "../middleWares/authorize";
 
 const orderHandler = new OrderModel();
 
@@ -70,11 +71,11 @@ const create_order = async (req: Request, res: Response) => {
 };
 
 const orders_routes = (app: express.Application) => {
-  app.get("/orders", indexAllOrders);
-  app.get("/orders/latest/:user_id", show_orders_by_user_id);
-  app.get("/orders/:id", update_order_status);
-  app.delete("/orders/:id", delete_order);
-  app.post("/orders", create_order);
+  app.get("/orders", authorizeToken, indexAllOrders);
+  app.get("/orders/latest/:user_id", authorizeToken, show_orders_by_user_id);
+  app.get("/orders/:id", authorizeToken, update_order_status);
+  app.delete("/orders/:id", authorizeToken, delete_order);
+  app.post("/orders", authorizeToken, create_order);
 };
 
 export default orders_routes;
