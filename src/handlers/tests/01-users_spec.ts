@@ -22,7 +22,6 @@ describe("User Routs", () => {
     const res = await request
       .get("/users")
       .set("Authorization", "Bearer " + token);
-    console.log("users", res.body);
 
     expect(res.body.length).toBeGreaterThan(0);
   });
