@@ -28,14 +28,14 @@ describe("User Routs", () => {
 
   it("get user by id", async () => {
     const res = await request
-      .get("/users/44")
+      .get("/users/144")
       .set("Authorization", "Bearer " + token);
     expect(res.body.firstname).toEqual("noura");
   });
 
   it("delets user", async () => {
     const res = await request
-      .delete("/users/43")
+      .delete("/users/144")
       .set("Authorization", "Bearer " + token);
 
     expect(res.status).toBe(200);

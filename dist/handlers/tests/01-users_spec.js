@@ -33,18 +33,17 @@ describe("User Routs", () => {
         const res = yield request
             .get("/users")
             .set("Authorization", "Bearer " + exports.token);
-        console.log("users", res.body);
         expect(res.body.length).toBeGreaterThan(0);
     }));
     it("get user by id", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
-            .get("/users/44")
+            .get("/users/143")
             .set("Authorization", "Bearer " + exports.token);
         expect(res.body.firstname).toEqual("noura");
     }));
     it("delets user", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
-            .delete("/users/43")
+            .delete("/users/143")
             .set("Authorization", "Bearer " + exports.token);
         expect(res.status).toBe(200);
     }));
