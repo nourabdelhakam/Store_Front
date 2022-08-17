@@ -28,9 +28,9 @@ describe("User Routs", () => {
 
   it("get user by id", async () => {
     const res = await request
-      .get("/users/144")
+      .get("/users/1")
       .set("Authorization", "Bearer " + token);
-    expect(res.body.firstname).toEqual("noura");
+    expect(res.status).toBe(200);
   });
 
   it("delets user", async () => {

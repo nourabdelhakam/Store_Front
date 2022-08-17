@@ -9,7 +9,7 @@ describe("Order Routs", () => {
     const res = await request
       .post("/orders")
       .send({
-        user_id: 145,
+        user_id: 1,
         status: "compeleted",
       })
       .set("Authorization", `Bearer ${token}`);
@@ -26,18 +26,18 @@ describe("Order Routs", () => {
 
   it("show orders by user_id", async () => {
     const res = await request
-      .get("/orders/latest/145")
+      .get("/orders/latest/1")
       .set("Authorization", "Bearer " + token);
     console.log(token);
 
-    expect(res.body[0].user_id).toEqual(44);
+    expect(res.body[0].user_id).toEqual(1);
   });
 
   it("update order", async () => {
     const res = await request
       .post("/orders/")
       .send({
-        user_id: 145,
+        user_id: 1,
         status: "active",
       })
       .set("Authorization", "Bearer " + token);

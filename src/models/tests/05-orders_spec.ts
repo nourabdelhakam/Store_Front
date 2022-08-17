@@ -5,7 +5,7 @@ const order = new OrderModel();
 describe("Order Model", () => {
   it("should create new order", async () => {
     const res = await order.create_order({
-      user_id: 145,
+      user_id: 1,
       status: "compeleted",
     });
     expect(res.id).toBeTruthy();
@@ -18,7 +18,7 @@ describe("Order Model", () => {
   });
 
   it("should return a order by user id", async () => {
-    const res = await order.show_orders_by_user_id(145);
+    const res = await order.show_orders_by_user_id(1);
     expect(res?.length).toBeGreaterThan(0);
   });
 });

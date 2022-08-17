@@ -21,7 +21,7 @@ describe("Order Routs", () => {
         const res = yield request
             .post("/orders")
             .send({
-            user_id: 44,
+            user_id: 145,
             status: "compeleted",
         })
             .set("Authorization", `Bearer ${_01_users_spec_1.token}`);
@@ -32,11 +32,11 @@ describe("Order Routs", () => {
             .get("/orders")
             .set("Authorization", "Bearer " + _01_users_spec_1.token);
         console.log("log", res.body);
-        expect(res.body.length).toBeGreaterThan(0);
+        expect(res.status).toBe(200);
     }));
     it("show orders by user_id", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
-            .get("/orders/latest/44")
+            .get("/orders/latest/145")
             .set("Authorization", "Bearer " + _01_users_spec_1.token);
         console.log(_01_users_spec_1.token);
         expect(res.body[0].user_id).toEqual(44);
@@ -45,7 +45,7 @@ describe("Order Routs", () => {
         const res = yield request
             .post("/orders/")
             .send({
-            user_id: 44,
+            user_id: 145,
             status: "active",
         })
             .set("Authorization", "Bearer " + _01_users_spec_1.token);

@@ -14,7 +14,7 @@ const order = new order_model_1.OrderModel();
 describe("Order Model", () => {
     it("should create new order", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield order.create_order({
-            user_id: 44,
+            user_id: 145,
             status: "compeleted",
         });
         expect(res.id).toBeTruthy();
@@ -25,7 +25,7 @@ describe("Order Model", () => {
         expect(res === null || res === void 0 ? void 0 : res.length).toBeGreaterThan(0);
     }));
     it("should return a order by user id", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield order.show_orders_by_user_id(44);
+        const res = yield order.show_orders_by_user_id(145);
         expect(res === null || res === void 0 ? void 0 : res.length).toBeGreaterThan(0);
     }));
 });

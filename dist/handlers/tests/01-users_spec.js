@@ -37,13 +37,13 @@ describe("User Routs", () => {
     }));
     it("get user by id", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
-            .get("/users/143")
+            .get("/users/144")
             .set("Authorization", "Bearer " + exports.token);
-        expect(res.body.firstname).toEqual("noura");
+        expect(res.status).toBe(200);
     }));
     it("delets user", () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
-            .delete("/users/143")
+            .delete("/users/144")
             .set("Authorization", "Bearer " + exports.token);
         expect(res.status).toBe(200);
     }));
